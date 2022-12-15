@@ -1,0 +1,138 @@
+hello world
+File(
+    RawFile {
+        ncid: 65536,
+    },
+)
+Dimensions:
+	longitude : (1440)
+	latitude : (721)
+	time : (2)
+Variables:
+	longitude( longitude ): f32
+		units = Str("degrees_east")
+		long_name = Str("longitude")
+	latitude( latitude ): f32
+		units = Str("degrees_north")
+		long_name = Str("latitude")
+	time( time ): i32
+		units = Str("hours since 1900-01-01 00:00:00.0")
+		long_name = Str("time")
+		calendar = Str("gregorian")
+	u10( time  latitude  longitude ): i16
+		scale_factor = Double(0.0006439980620450766)
+		add_offset = Double(1.062895164054915)
+		_FillValue = Short(-32767)
+		missing_value = Short(-32767)
+		units = Str("m s**-1")
+		long_name = Str("10 metre U wind component")
+	v10( time  latitude  longitude ): i16
+		scale_factor = Double(0.000778660897855136)
+		add_offset = Double(-1.71329521423799)
+		_FillValue = Short(-32767)
+		missing_value = Short(-32767)
+		units = Str("m s**-1")
+		long_name = Str("10 metre V wind component")
+	d2m( time  latitude  longitude ): i16
+		scale_factor = Double(0.0012928243213342896)
+		add_offset = Double(258.1032354237768)
+		_FillValue = Short(-32767)
+		missing_value = Short(-32767)
+		units = Str("K")
+		long_name = Str("2 metre dewpoint temperature")
+	t2m( time  latitude  longitude ): i16
+		scale_factor = Double(0.0014293252063845695)
+		add_offset = Double(266.2210870952093)
+		_FillValue = Short(-32767)
+		missing_value = Short(-32767)
+		units = Str("K")
+		long_name = Str("2 metre temperature")
+	i10fg( time  latitude  longitude ): i16
+		scale_factor = Double(0.0005904486645289082)
+		add_offset = Double(19.462457356310434)
+		_FillValue = Short(-32767)
+		missing_value = Short(-32767)
+		units = Str("m s**-1")
+		long_name = Str("Instantaneous 10 metre wind gust")
+	mx2t( time  latitude  longitude ): i16
+		scale_factor = Double(0.001401637581447515)
+		add_offset = Double(267.244111192928)
+		_FillValue = Short(-32767)
+		missing_value = Short(-32767)
+		units = Str("K")
+		long_name = Str("Maximum temperature at 2 metres since previous post-processing")
+	mtpr( time  latitude  longitude ): i16
+		scale_factor = Double(1.3460773973690677e-7)
+		add_offset = Double(0.004410557200219487)
+		_FillValue = Short(-32767)
+		missing_value = Short(-32767)
+		units = Str("kg m**-2 s**-1")
+		long_name = Str("Mean total precipitation rate")
+	mn2t( time  latitude  longitude ): i16
+		scale_factor = Double(0.001393352156547083)
+		add_offset = Double(266.647328836617)
+		_FillValue = Short(-32767)
+		missing_value = Short(-32767)
+		units = Str("K")
+		long_name = Str("Minimum temperature at 2 metres since previous post-processing")
+	ptype( time  latitude  longitude ): i16
+		scale_factor = Double(0.0001220759006912548)
+		add_offset = Double(3.9999389620496544)
+		_FillValue = Short(-32767)
+		missing_value = Short(-32767)
+		units = Str("code table (4.201)")
+		long_name = Str("Precipitation type")
+	skt( time  latitude  longitude ): i16
+		scale_factor = Double(0.0018269813617578644)
+		add_offset = Double(275.28613484916286)
+		_FillValue = Short(-32767)
+		missing_value = Short(-32767)
+		units = Str("K")
+		long_name = Str("Skin temperature")
+	stl1( time  latitude  longitude ): i16
+		scale_factor = Double(0.0016070036100609617)
+		add_offset = Double(271.7117056534684)
+		_FillValue = Short(-32767)
+		missing_value = Short(-32767)
+		units = Str("K")
+		long_name = Str("Soil temperature level 1")
+		standard_name = Str("surface_temperature")
+	stl2( time  latitude  longitude ): i16
+		scale_factor = Double(0.0014566607752725725)
+		add_offset = Double(266.26294354461237)
+		_FillValue = Short(-32767)
+		missing_value = Short(-32767)
+		units = Str("K")
+		long_name = Str("Soil temperature level 2")
+	sp( time  latitude  longitude ): i16
+		scale_factor = Double(0.8540763813651138)
+		add_offset = Double(76788.42843055932)
+		_FillValue = Short(-32767)
+		missing_value = Short(-32767)
+		units = Str("Pa")
+		long_name = Str("Surface pressure")
+		standard_name = Str("surface_air_pressure")
+	tp( time  latitude  longitude ): i16
+		scale_factor = Double(4.845864077947251e-7)
+		add_offset = Double(0.015877958237801963)
+		_FillValue = Short(-32767)
+		missing_value = Short(-32767)
+		units = Str("m")
+		long_name = Str("Total precipitation")
+	swvl1( time  latitude  longitude ): i16
+		scale_factor = Double(1.1885626780152377e-5)
+		add_offset = Double(0.37593552745199843)
+		_FillValue = Short(-32767)
+		missing_value = Short(-32767)
+		units = Str("m**3 m**-3")
+		long_name = Str("Volumetric soil water layer 1")
+	swvl2( time  latitude  longitude ): i16
+		scale_factor = Double(1.1698645550595692e-5)
+		add_offset = Double(0.38211102116619616)
+		_FillValue = Short(-32767)
+		missing_value = Short(-32767)
+		units = Str("m**3 m**-3")
+		long_name = Str("Volumetric soil water layer 2")
+Attributes:
+		Conventions = Str("CF-1.6")
+		history = Str("2022-12-09 22:58:28 GMT by grib_to_netcdf-2.25.1: /opt/ecmwf/mars-client/bin/grib_to_netcdf.bin -S param -o /cache/data9/adaptor.mars.internal-1670626707.9076283-24141-9-1f238e6f-0068-4761-8809-288e20143600.nc /cache/tmp/1f238e6f-0068-4761-8809-288e20143600-adaptor.mars.internal-1670626706.429165-24141-12-tmp.grib")
