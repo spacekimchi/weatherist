@@ -9,6 +9,11 @@ use std::{env, io};
 
 use actix_web::{middleware, App, web, HttpServer};
 
+//mod recipe;
+//mod response;
+mod user;
+mod response;
+
 pub struct AppState {
     db: Pool<Postgres>,
 }
@@ -31,6 +36,8 @@ async fn main() -> io::Result<()> {
         App::new()
             .wrap(middleware::Logger::default())
             .app_data(web::Data::new(AppState { db: pool.clone() }))
+            //.service(recipe::create)
+            //.service(recipe::get)
     })
     .bind(("127.0.0.1", 8080))?
     .run()
