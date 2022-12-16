@@ -2,7 +2,7 @@
 extern crate actix_web;
 
 use dotenv::dotenv;
-use sqlx::{postgres::PgPoolOptions, Pool, Postgres};
+use sqlx::{migrate::Migrator, postgres::PgPoolOptions, Pool, Postgres};
 
 use std::{env, io};
 //use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
@@ -12,6 +12,7 @@ use actix_web::{middleware, App, web, HttpServer};
 //mod recipe;
 //mod response;
 mod user;
+mod spot;
 mod response;
 
 pub struct AppState {
@@ -32,12 +33,18 @@ async fn main() -> io::Result<()> {
         .await
         .expect("Error building a conneciton pool");
 
+    sqlx::migrate!("db/migrations")
+        .run(&pool)
+        .await.expect("migration error");
+
     HttpServer::new(move || {
         App::new()
             .wrap(middleware::Logger::default())
             .app_data(web::Data::new(AppState { db: pool.clone() }))
-            //.service(recipe::create)
-            //.service(recipe::get)
+            .service(user::create)
+            .service(user::get)
+            .service(user::list)
+            .service(user::delete)
     })
     .bind(("127.0.0.1", 8080))?
     .run()
