@@ -55,7 +55,7 @@ pub async fn create(state: Data<AppState>, body: Json<UserRequest>) -> HttpRespo
     let created_at = chrono::offset::Utc::now();
     println!("id: {}, username: {}, email: {}, created_at: {}", id, body.username, body.email, created_at);
     match sqlx::query_as::<_, User>(
-        "INSERT INTO users (username, email, created_at) VALUES ($1, $2, $3, $4) RETURNING id, username, email, created_at"
+        "INSERT INTO users (username, email, created_at) VALUES ($1, $2, $3) RETURNING id, username, email, created_at"
     )
     //.bind(id)
     .bind(body.username.clone())
