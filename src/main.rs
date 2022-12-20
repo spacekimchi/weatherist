@@ -2,7 +2,7 @@
 extern crate actix_web;
 
 use dotenv::dotenv;
-use sqlx::{postgres::PgPoolOptions, Pool, Postgres};
+use sqlx::{migrate::Migrator, postgres::PgPoolOptions, Pool, Postgres, query_file};
 
 use std::{env, io};
 //use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
@@ -12,7 +12,9 @@ use actix_web::{middleware, App, web, HttpServer};
 //mod recipe;
 //mod response;
 mod user;
+mod spot;
 mod response;
+mod seeds;
 
 pub struct AppState {
     db: Pool<Postgres>,
@@ -36,8 +38,13 @@ async fn main() -> io::Result<()> {
         App::new()
             .wrap(middleware::Logger::default())
             .app_data(web::Data::new(AppState { db: pool.clone() }))
-            //.service(recipe::create)
-            //.service(recipe::get)
+            .service(user::create)
+            .service(user::get)
+            .service(user::list)
+            .service(user::delete)
+            .service(seeds::seed)
+            .service(seeds::spots_seed)
+            .service(seeds::migrate)
     })
     .bind(("127.0.0.1", 8080))?
     .run()

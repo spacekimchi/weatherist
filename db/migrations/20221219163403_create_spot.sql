@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS spots
+(
+    id SERIAL NOT NULL PRIMARY KEY,
+    user_id INTEGER REFERENCES users (id),
+    name TEXT NOT NULL,
+    shared BOOLEAN DEFAULT FALSE,
+    content TEXT,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);

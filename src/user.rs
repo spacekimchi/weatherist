@@ -12,13 +12,11 @@ pub type Users = Response<User>;
 
 #[derive(Debug, Deserialize, Serialize, FromRow)]
 pub struct User {
-    pub id: Uuid,
+    pub id: i32,
     #[serde(with = "chrono::serde::ts_seconds")]
     pub created_at: chrono::DateTime<chrono::offset::Utc>,
-    pub instructions: Vec<String>,
-    pub body: String,
-    pub ingredients: Vec<String>,
-    pub url: String,
+    pub username: String,
+    pub email: String,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -27,14 +25,13 @@ pub struct UserRequest {
     pub email: String,
 }
 
-impl User { pub fn new(instructions: Vec<String>, body: String, ingredients: Vec<String>, url: String) -> Self {
+impl User {
+    pub fn new(username: String, email: String) -> Self {
         Self {
-            id: uuid::Uuid::new_v4(),
+            id: 0,
             created_at: chrono::offset::Utc::now(),
-            instructions,
-            body,
-            ingredients,
-            url,
+            username,
+            email,
         }
     }
 }
@@ -42,6 +39,7 @@ impl User { pub fn new(instructions: Vec<String>, body: String, ingredients: Vec
 #[get("/users")]
 pub async fn list(state: Data<AppState>) -> impl Responder {
     // TODO: get users this will have query params "?ingredients=apple,chicken,thyme"
+    println!("[users.rs:list]");
     match sqlx::query_as::<_, User>("SELECT id, username, email, created_at FROM users")
         .fetch_all(&state.db)
         .await
@@ -57,9 +55,9 @@ pub async fn create(state: Data<AppState>, body: Json<UserRequest>) -> HttpRespo
     let created_at = chrono::offset::Utc::now();
     println!("id: {}, username: {}, email: {}, created_at: {}", id, body.username, body.email, created_at);
     match sqlx::query_as::<_, User>(
-        "INSERT INTO users (id, username, email, created_at) VALUES ($1, $2, $3, $4) RETURNING id, username, email, created_at"
+        "INSERT INTO users (username, email, created_at) VALUES ($1, $2, $3) RETURNING id, username, email, created_at"
     )
-    .bind(id)
+    //.bind(id)
     .bind(body.username.clone())
     .bind(body.email.to_string())
     .bind(created_at)
