@@ -90,6 +90,7 @@ pub async fn get(state: Data<AppState>, path: Path<String>) -> impl Responder {
         }
 }
 
+
 #[delete("/spots/{spot_id}")]
 pub async fn delete(state: Data<AppState>, path: Path<(String,)>) -> HttpResponse {
     // TODO: Delete spot by ID
